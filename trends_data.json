@@ -1,0 +1,59 @@
+{
+    "last_updated": "2026-01-20 13:50:35",
+    "categories": {
+        "AI & Tech": [
+            {
+                "name": "Generative AI",
+                "value": 173
+            },
+            {
+                "name": "LLM Fine Tuning",
+                "value": 481
+            },
+            {
+                "name": "AI Agents",
+                "value": 322
+            },
+            {
+                "name": "Nvidia GPU Cloud",
+                "value": 455
+            }
+        ],
+        "Finance": [
+            {
+                "name": "Crypto Arbitrage",
+                "value": 400
+            },
+            {
+                "name": "Options Trading",
+                "value": 307
+            },
+            {
+                "name": "Mortgage Rates",
+                "value": 160
+            },
+            {
+                "name": "Stock Portfolio AI",
+                "value": 383
+            }
+        ],
+        "SaaS": [
+            {
+                "name": "CRM Automation",
+                "value": 362
+            },
+            {
+                "name": "HR Software",
+                "value": 218
+            },
+            {
+                "name": "Cloud Hosting",
+                "value": 392
+            },
+            {
+                "name": "Cybersecurity Tools",
+                "value": 462
+            }
+        ]
+    }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Topics - Real-time High Value Insights</title>
+    <meta name="description"
+        content="Discover real-time breakdown of trending topics in AI, Finance, and Software. Updated daily for high-value insights.">
+
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-9678039656589629">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9678039656589629"
+        crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #007bff;
+            --bg: #f8f9fa;
+            --card-bg: #fff;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .update-time {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .ad-banner {
+            background: #eee;
+            margin: 2rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .ad-banner::after {
+            content: "Advertisement";
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 10px;
+            color: #999;
+        }
+
+        .trends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .trend-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .trend-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .trend-category {
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .trend-item {
+            border-bottom: 1px solid #eee;
+            padding: 0.75rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trend-item:last-child {
+            border-bottom: none;
+        }
+
+        .trend-name {
+            font-weight: 500;
+        }
+
+        .trend-value {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 4rem;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Global Breakout Trends</h1>
+            <p>Daily updated "Keyword Arbitrage" data for high-CPC niches.</p>
+            <div id="updateTime" class="update-time">Loading latest data...</div>
+        </header>
+
+        <div class="ad-banner">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9678039656589629"
+                data-ad-slot="1881562808" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div id="loading">Scanning Global Trends...</div>
+        <div id="trendsGrid" class="trends-grid hidden"></div>
+
+        <div class="ad-banner" style="margin-top: 3rem;">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9678039656589629"
+                data-ad-slot="4316154459" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <footer>
+            &copy; 2024 Rizwan's Creations - Automated Trend Arbitrage System.
+        </footer>
+    </div>
+
+    <script>
+        async function loadTrends() {
+            try {
+                const response = await fetch('trends_data.json');
+                const data = await response.json();
+
+                document.getElementById('updateTime').textContent = "Last Updated: " + data.last_updated;
+                const grid = document.getElementById('trendsGrid');
+                grid.innerHTML = '';
+
+                for (const [category, items] of Object.entries(data.categories)) {
+                    const card = document.createElement('div');
+                    card.className = 'trend-card';
+                    card.innerHTML = `
+                        <span class="trend-category">${category}</span>
+                        ${items.map(item => `
+                            <div class="trend-item">
+                                <span class="trend-name">${item.name}</span>
+                                <span class="trend-value">+${item.value}%</span>
+                            </div>
+                        `).join('')}
+                    `;
+                    grid.appendChild(card);
+                }
+
+                document.getElementById('loading').classList.add('hidden');
+                grid.classList.remove('hidden');
+            } catch (error) {
+                console.error('Error loading trends:', error);
+                document.getElementById('loading').textContent = "Waiting for daily trend update...";
+            }
+        }
+        loadTrends();
+    </script>
+</body>
+
+</html>

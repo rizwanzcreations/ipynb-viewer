@@ -1,0 +1,40 @@
+name: Update Daily Trends
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-trends:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/checkout@v4 # Should be actions/setup-python@v5
+        # Fixing the mistake in next step
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install pytrends
+
+      - name: Run update script
+        run: python update_trends.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add trends_data.json
+          git commit -m "Automated update: Daily Trends [skip ci]" || echo "No changes to commit"
+          git push
